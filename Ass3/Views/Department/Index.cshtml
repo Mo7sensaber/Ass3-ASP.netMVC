@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Department>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>All Department</h1>
+<br />
+<br />
+<a asp-controller="Department" asp-action="Create" class="btn btn-primary">Create Department</a>
+<hr />
+<table border="1" class="table">
+    <tr class="table-light">
+        <th>Code</th>
+        <th>Name</th>
+        <th>Date Of Creation</th>
+        <th>Details</th>
+        <th>Update</th>
+        <th>Delete</th>
+
+    </tr>
+    @foreach(var department in Model)
+    {
+        <tr>
+        <td>@department.Code</td>
+        <td>@department.Name</td>
+        <td>@department.DateOfCreation</td>
+            <td><a asp-route-id="@department.Id" asp-action="Details" class="btn btn-warning">Details</a></td>
+            <td><a asp-route-id="@department.Id" asp-action="Update" class="btn btn-success">Update</a></td>
+            <td>
+                <form asp-controller="Department" asp-action="Delete" asp-route-id="@department.Id" method="post" onsubmit="return confirm('Are you sure you want to delete this department?');">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
